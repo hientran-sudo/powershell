@@ -5,9 +5,8 @@ function CheckFolder ([string]$var) {
     switch ($result) {
         true {
             # $name = Get-ChildItem $var -Name
-            $count = (Get-ChildItem $var | Measure-Object).Count;
-            $size = Get-ChildItem $var -Recurse | Measure-Object 
-            return  $count, $size
+            $info = Get-ChildItem $var -Recurse | Measure-Object -Property Length -Sum
+            return $info 
             break
         }
         false {
